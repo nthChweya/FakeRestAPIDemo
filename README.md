@@ -76,3 +76,55 @@ After successful installation, run the below command
 ***newman run ""Reqres.postman_collection.json" --reporters=cli,htmlextra***
 
 
+## Install Newman in Jenkins
+
+Install Jenkins if you haven't already, and start it. By default, Jenkins is configured at http://localhost:8080 if you're running it locally. Install the NodeJS plugin in Jenkins, then install Newman in it.
+
+### To install NodeJS in Jenkins, do the following:
+
+1. Select Manage Jenkins.
+2. Under System Configuration, select       Plugins.
+3. Select Available plugins, and search for "NodeJS".
+4. Select the checkbox next to NodeJS, and select Install.
+
+To install Newman in Jenkins, do the following:
+
+1. Select Manage Jenkins.
+2. Under System Configuration, select Tools.
+3. Under NodeJS installations, select Add NodeJS.
+4. Enter a name for the NodeJS installation.
+5. In Global npm packages to install, enter newman.
+6. Select Save.
+
+Configure Jenkins
+
+After you install Newman in Jenkins, you can configure Jenkins to run a collection using Newman. You'll need a Postman Collection that has at least one request with tests. Then export the collection as a JSON file so you can run it using Newman.
+
+Optionally, you can import a sample "Hello World" collection into your workspace to follow these instructions. Select the following Run in Postman button to import the collection.
+
+
+To configure Jenkins to run Newman, do the following:
+
+1. On the Dashboard page, select + New Item to create a new job.
+
+2. Select Freestyle project from the options, name your project, and select OK.
+
+3. On the Configure page, select Build Environment, and select the checkbox next to Provide Node & npm bin/ folder to PATH. Select the NodeJS installation where you installed Newman.
+
+4. Select Build Steps, and select Add build step > Execute shell to run a shell command. Enter a shell command to run the collection using Newman.
+
+Test Newman in Jenkins
+
+1. On the Dashboard page, select the job you configured to run Newman.
+
+2. Select Build Now to manually run the build. After the build runs, review the Build History to check if the build succeeded:
+
+        If the build succeeded, Jenkins indicates this with a green checkmark.
+
+        If the build failed, Jenkins indicates this with a red cross mark.
+
+3. Select the build from the Build History, then select Console Output to review the results of the collection run.
+
+4. If the build failed, go to the collection in Postman to fix your tests. Then export the collection as a JSON file, and run the build again.
+
+
